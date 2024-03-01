@@ -1,8 +1,8 @@
-import { getAllPosts } from "@/lib/post";
-import Image from "next/image";
+import {getAllPosts} from "@/lib/post";
 
-export default function Home() {
-  const posts = getAllPosts('**');
+
+export default function BlogPage() {
+  const posts = getAllPosts('en');
   return (
     <div>
       <h1>Posts</h1>
@@ -12,7 +12,6 @@ export default function Home() {
             <li key={post.slug}>
               <a href={`/blog/${post.slug.replace('/posts', '')}`}>{post.frontmatter.title}</a>
               <p>{post.frontmatter.date}</p>
-              <p>{post.frontmatter.language}</p>
             </li>
           )
         })}

@@ -1,11 +1,8 @@
 import {getAllPosts} from "@/lib/post";
-import {MDXRemoteSerializeResult} from "next-mdx-remote";
-import * as fs from "fs";
-import {serialize} from "next-mdx-remote/serialize";
 
 
 export default function BlogPage() {
-  const posts = getAllPosts();
+  const posts = getAllPosts('ko');
   return (
     <div>
       <h1>Posts</h1>

@@ -12,6 +12,7 @@ type Post = {
   frontmatter: {
     title: string;
     date: string;
+    language: string;
   }
 }
 
@@ -20,14 +21,16 @@ function buildFrontmatter(path: string) {
   const frontmatter = raw.split('---')[1];
   const title = frontmatter.split('title: ')[1].split('\n')[0];
   const date = frontmatter.split('date: ')[1].split('\n')[0];
+  const language = frontmatter.split('language: ')[1].split('\n')[0];
   return {
     title,
-    date
+    date,
+    language,
   };
 }
 
-export function getAllPosts(): Array<Post> {
-  const postPaths = sync(`${POSTS_PATH}/**/*.mdx`);
+export function getAllPosts(language: string): Array<Post> {
+  const postPaths = sync(`${POSTS_PATH}/${language}/**/*.mdx`);
 
   return postPaths.map((path) => {
     return {
