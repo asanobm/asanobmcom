@@ -1,7 +1,7 @@
 "use client"; // This is required!
 
 import {MDXRemote, type MDXRemoteSerializeResult} from "next-mdx-remote";
-
+import 'github-markdown-css';
 
 type MdxContentProps = {
   source: MDXRemoteSerializeResult;
@@ -11,7 +11,6 @@ import type {MDXComponents} from "mdx/types";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    h1: ({children}) => <h1>{children}</h1>,
     ...components,
   };
 }
