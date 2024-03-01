@@ -1,6 +1,9 @@
 import {sync} from "glob";
 import {BASE_PATH, POSTS_PATH} from "@/constants";
 import * as fs from "fs";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
+import path from "path";
 
 /**
  * Get all posts from the posts directory
@@ -38,4 +41,24 @@ export function getAllPosts(language: string): Array<Post> {
       frontmatter: buildFrontmatter(path)
     }
   })
+}
+
+type Frontmatter = {
+  title: string;
+  date: string;
+};
+
+type PostFrontMatter<TFrontmatter> = {
+  serialized: MDXRemoteSerializeResult;
+  frontmatter: TFrontmatter;
+};
+
+export async function getPost(language: string, slug: string): Promise<PostFrontMatter<Frontmatter>> {
+  const raw = fs.readFileSync(path.join(`${POSTS_PATH}/${language}`, `${slug}.mdx`), "utf-8");
+  const serialized = await serialize(raw);
+  const frontmatter = serialized.frontmatter as Frontmatter;
+  return {
+    serialized,
+    frontmatter,
+  };
 }

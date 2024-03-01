@@ -4,29 +4,10 @@ import {POSTS_PATH} from "@/constants";
 import {serialize} from "next-mdx-remote/serialize";
 import {type MDXRemoteSerializeResult} from "next-mdx-remote";
 import MDXContent from "@/components/MdxContent";
-
-type Frontmatter = {
-  title: string;
-  date: string;
-};
-
-type Post<TFrontmatter> = {
-  serialized: MDXRemoteSerializeResult;
-  frontmatter: TFrontmatter;
-};
-
-async function getPost(filepath: string): Promise<Post<Frontmatter>> {
-  const raw = await fs.readFileSync(filepath, "utf-8");
-  const serialized = await serialize(raw);
-  const frontmatter = serialized.frontmatter as Frontmatter;
-  return {
-    serialized,
-    frontmatter,
-  };
-}
+import { getPost } from "@/lib/post";
 
 async function Page({ params }: { params: { slug: string } }) {
-  const {serialized, frontmatter} = await getPost(path.join(POSTS_PATH, `${params.slug}.mdx`));
+  const {serialized, frontmatter} = await getPost('en', params.slug);
   return (
     <div>
       <h1>{frontmatter.title}</h1>

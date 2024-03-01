@@ -1,5 +1,4 @@
 import { getAllPosts } from "@/lib/post";
-import Image from "next/image";
 
 export default function Home() {
   const posts = getAllPosts('**');
@@ -10,7 +9,7 @@ export default function Home() {
         {posts.map((post) => {
           return (
             <li key={post.slug}>
-              <a href={`/blog/${post.slug.replace('/posts', '')}`}>{post.frontmatter.title}</a>
+              <a href={`${post.slug.replace('/posts', '')}`}>{post.frontmatter.title}</a>
               <p>{post.frontmatter.date}</p>
               <p>{post.frontmatter.language}</p>
             </li>
