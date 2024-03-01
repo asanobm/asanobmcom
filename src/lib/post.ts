@@ -16,6 +16,7 @@ type Post = {
     title: string;
     date: string;
     language: string;
+    thumbnail: string;
   }
 }
 
@@ -25,10 +26,12 @@ function buildFrontmatter(path: string) {
   const title = frontmatter.split('title: ')[1].split('\n')[0];
   const date = frontmatter.split('date: ')[1].split('\n')[0];
   const language = frontmatter.split('language: ')[1].split('\n')[0];
+  const thumbnail = frontmatter.split('thumbnail: ')[1].split('\n')[0];
   return {
     title,
     date,
     language,
+    thumbnail,
   };
 }
 
@@ -54,6 +57,7 @@ type PostFrontMatter<TFrontmatter> = {
 };
 
 export async function getPost(language: string, slug: string): Promise<PostFrontMatter<Frontmatter>> {
+  // path.join(POSTS_PATH, `${params.slug}.mdx`)
   const raw = fs.readFileSync(path.join(`${POSTS_PATH}/${language}`, `${slug}.mdx`), "utf-8");
   const serialized = await serialize(raw);
   const frontmatter = serialized.frontmatter as Frontmatter;
