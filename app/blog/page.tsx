@@ -13,7 +13,8 @@ export default function BlogPage() {
         {posts.map((post) => {
           return (
             <li key={post.slug}>
-              <a href={`/blog/${post.slug.replace('/posts', '')}`}>{post.slug}</a>
+              <a href={`/blog/${post.slug.replace('/posts', '')}`}>{post.frontmatter.title}</a>
+              <p>{post.frontmatter.date}</p>
             </li>
           )
         })}
