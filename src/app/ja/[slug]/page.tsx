@@ -1,8 +1,3 @@
-import path from "path";
-import * as fs from "fs";
-import {POSTS_PATH} from "@/constants";
-import {serialize} from "next-mdx-remote/serialize";
-import {type MDXRemoteSerializeResult} from "next-mdx-remote";
 import MDXContent from "@/components/MdxContent";
 import { getPost } from "@/lib/post";
 
