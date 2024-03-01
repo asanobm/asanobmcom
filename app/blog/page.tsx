@@ -1,4 +1,7 @@
 import {getAllPosts} from "@/lib/post";
+import {MDXRemoteSerializeResult} from "next-mdx-remote";
+import * as fs from "fs";
+import {serialize} from "next-mdx-remote/serialize";
 
 
 export default function BlogPage() {
