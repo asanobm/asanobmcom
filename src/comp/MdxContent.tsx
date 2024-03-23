@@ -17,7 +17,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
 export default function MdxContent({source}: MdxContentProps) {
   return (
-    <div className={'markdown-body'}>
+    <div>
       <MDXRemote {...source} components={useMDXComponents}/>
     </div>
   )
