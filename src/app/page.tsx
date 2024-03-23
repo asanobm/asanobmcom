@@ -3,7 +3,6 @@ import Image from "next/image";
 
 export default function Home() {
   const allPosts = getAllPosts('**');
-  // Last 5 posts sorted by date
   const last5Posts = allPosts
     .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
     .slice(0, 5);
